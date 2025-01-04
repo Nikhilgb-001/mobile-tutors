@@ -1,38 +1,35 @@
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="w-full bg-[#d4d8f0] text-black">
       <div className="max-w-screen-xl mx-auto py-10 px-4 flex flex-col md:flex-row gap-16 md:gap-10">
-        {/* Left Section */}
-        <div className="basis-full md:basis-1/2 flex justify-center md:justify-start">
-          <Link to={"/"} className="logo">
-            <img
-              src="https://mobiletutors.co.uk/wp-content/uploads/2022/08/Hres-LOGO-Corporate-21-22.png"
-              alt="Voigo Logo"
-              className="h-52 w-full"
-            />
-          </Link>
-        </div>
-
         {/* Right Section */}
-        <div className="basis-full md:basis-1/2 flex flex-col sm:flex-row gap-8 sm:gap-4">
+        <div className="basis-full md:basis-1/2 flex flex-row sm:flex-row gap-8 sm:gap-4">
           {/* Column 1 */}
           <div className="flex-1">
-            <h4 className="mb-6 text-zinc-500 capitalize text-center sm:text-left">
+            <h4 className="mb-6 text-zinc-500 capitalize text-center">
               Socials
             </h4>
             {["instagram", "twitter", "facebook"].map((item, index) => (
               <Link
                 key={index}
                 to="/coming-soon"
-                className="mt-2 block text-zinc-600 text-sm capitalize text-center sm:text-left"
+                className="mt-2 block text-zinc-600 text-sm capitalize text-center"
               >
-                {item}
+                {item === "instagram" && (
+                  <FaInstagram className="inline-block mx-auto" />
+                )}
+                {item === "twitter" && (
+                  <FaTwitter className="inline-block mx-auto" />
+                )}
+                {item === "facebook" && (
+                  <FaFacebook className="inline-block mx-auto" />
+                )}
               </Link>
             ))}
           </div>
-
           {/* Column 2 */}
           <div className="flex-1">
             <h4 className="mb-6 text-zinc-500 capitalize text-center sm:text-left">
@@ -48,7 +45,6 @@ const Footer = () => {
               </Link>
             ))}
           </div>
-
           {/* Column 3 */}
           <div className="flex-1">
             <h4 className="mb-6 text-zinc-500 capitalize text-center sm:text-left">
@@ -83,6 +79,15 @@ const Footer = () => {
               </Link>
             </span>
           </div>
+        </div>
+        <div className="basis-full md:basis-1/2 flex justify-center md:justify-end">
+          <Link to={"/"} className="logo">
+            <img
+              src="https://mobiletutors.co.uk/wp-content/uploads/2022/08/Hres-LOGO-Corporate-21-22.png"
+              alt="Mobile Tutors Logo"
+              className="h-52 w-full"
+            />
+          </Link>
         </div>
       </div>
     </div>

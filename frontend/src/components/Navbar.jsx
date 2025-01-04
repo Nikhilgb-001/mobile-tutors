@@ -15,7 +15,7 @@ const Navbar = () => {
           <img
             src="https://mobiletutors.co.uk/wp-content/uploads/2021/12/cropped-Mobile-Tutors-Logo-B16-clear-background-300x146.png"
             alt="Logo"
-            className="h-10"
+            className="h-16"
           />
         </div>
 
