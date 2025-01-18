@@ -9,6 +9,10 @@ import BoostGrades from "./components/BoostGrades";
 import FAQ from "./components/Faq";
 import PricingComponent from "./components/PricingComponent";
 import ContactComponent from "./components/ContactComponent";
+import MultiStepForm from "./components/MultiStepForm";
+import PlanSelection from "./components/PlanSelection";
+import PaymentSelection from "./components/PaymentSelection";
+import StepFive from "./components/StepFive";
 
 const App = () => {
   return (
@@ -23,8 +27,10 @@ const App = () => {
         <TestimonialCarousel />
         <LovedByStudents />
         <ContactComponent />
-        {/* <StatsSection /> */}
-        {/* <ContactForm /> */}
+        <MultiStepForm />
+        {/* <PlanSelection />
+        <PaymentSelection /> */}
+        {/* <StepFive /> */}
         <Footer />
       </div>
     </>
