@@ -60,6 +60,24 @@ const MultiStepForm = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
+  const getPlanPrice = () => {
+    if (selectedPlan === "Pro") {
+      return { price: 899, discount: "-63%", original: 2400 };
+    } else {
+      return { price: 599, discount: "-67%", original: 1800 };
+    }
+  };
+
+  const getPaymentDetails = () => {
+    const { price } = getPlanPrice();
+    if (selectedPayment === "Full Payment") {
+      return { total: price, installment: null };
+    } else {
+      const installment = (price / 4).toFixed(2);
+      return { total: price, installment };
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
@@ -248,12 +266,21 @@ const MultiStepForm = () => {
             </div>
             <div className="text-center">
               <p className="text-sm text-gray-500">Your total comes to just:</p>
-              <p className="text-3xl font-bold text-red-500">
+              {/* <p className="text-3xl font-bold text-red-500">
                 £899.00{" "}
                 <span className="line-through text-gray-400 text-sm">
                   £2,400.00
                 </span>
                 <span className="text-green-500 text-sm ml-2">-63%</span>
+              </p> */}
+              <p className="text-lg text-red-500 font-bold">
+                £{getPlanPrice().price.toFixed(2)}
+                <span className="line-through text-gray-400 text-sm ml-2">
+                  £{getPlanPrice().original.toFixed(2)}
+                </span>
+              </p>
+              <p className="text-green-500 text-sm">
+                {getPlanPrice().discount}
               </p>
             </div>
             <button
@@ -307,14 +334,18 @@ const MultiStepForm = () => {
               </div>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-500">Your total comes to just:</p>
-              <p className="text-3xl font-bold text-red-500">
-                £549.00{" "}
-                <span className="line-through text-gray-400 text-sm">
-                  £1,800.00
-                </span>
-                <span className="text-green-500 text-sm ml-2">-70%</span>
+              <p className="text-sm text-gray-500 inline">
+                Your total comes to just: {""}
               </p>
+              {selectedPayment === "Full Payment" ? (
+                <span className="text-lg font-bold text-red-500">
+                  £{getPlanPrice().price.toFixed(2)}
+                </span>
+              ) : (
+                <span className="text-lg font-bold text-red-500">
+                  £{(getPlanPrice().price / 4).toFixed(2)} today
+                </span>
+              )}
             </div>
             <button
               onClick={handleContinue}
@@ -333,14 +364,15 @@ const MultiStepForm = () => {
             <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6 space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-gray-700 font-semibold">
-                  Chosen subjects for Year 5/6
+                  Chosen subjects for Year{" "}
+                  <span className="text-purple-500">{selectedClass}</span>
                 </h2>
                 <button className="text-blue-500 text-sm flex items-center space-x-1">
-                  <span>Edit</span>
+                  <span onClick={() => setCurrentStep(2)}>Edit</span>
                 </button>
               </div>
               <div className="flex space-x-4">
-                {["English", "Maths", "Science"].map((subject, index) => (
+                {selectedSubjects.map((subject, index) => (
                   <span
                     key={index}
                     className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
@@ -350,7 +382,7 @@ const MultiStepForm = () => {
                 ))}
               </div>
               <div className="flex space-x-2">
-                {["+ Ultimate Pass", "+ Pay Upfront"].map((discount, index) => (
+                {[selectedPlan, selectedPayment].map((discount, index) => (
                   <span
                     key={index}
                     className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm"
@@ -387,7 +419,7 @@ const MultiStepForm = () => {
                     Your total comes to just:
                   </p>
                   <p className="text-3xl font-bold text-red-500">
-                    £549.00{" "}
+                    £{getPaymentDetails().total} {}
                     <span className="line-through text-gray-400 text-sm">
                       £1,800.00
                     </span>
@@ -396,7 +428,7 @@ const MultiStepForm = () => {
                 </div>
               </div>
               <button
-                onClick={handleContinue}
+                onClick={() => alert("Work in progress...!")}
                 className="w-full bg-black text-white py-2 rounded-lg"
               >
                 Checkout
