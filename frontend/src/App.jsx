@@ -52,7 +52,7 @@ const Home = () => (
     <HeroSection />
     <BoostGrades />
     <TutoringSections />
-    <PricingComponent />
+    {/* <PricingComponent /> */}
     <FAQ />
     <TestimonialCarousel />
     <LovedByStudents />
