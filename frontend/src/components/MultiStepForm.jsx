@@ -9,7 +9,6 @@ const MultiStepForm = () => {
   const [email, setEmail] = useState("");
 
   const subjects = ["English", "Biology", "Chemistry", "Physics", "Maths"];
-  const totalSubjects = subjects.length;
 
   const pricing = {
     "Launch GCSE": [20, 37, 52, 67, 92],
