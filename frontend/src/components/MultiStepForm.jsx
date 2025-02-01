@@ -10,15 +10,62 @@ const MultiStepForm = () => {
 
   const subjects = ["English", "Biology", "Chemistry", "Physics", "Maths"];
 
-  const pricing = {
-    "Launch GCSE": [20, 37, 52, 67, 92],
-    "GCSE Mastery": [5, 10, 15, 20, 30],
-  };
-
-  const calculatePrice = () => {
+  let liveLessons = 0;
+  const calculatePrice = (plan) => {
     const numSubjects = selectedSubjects.length;
-    if (numSubjects === 0 || !selectedPlan) return 0;
-    return pricing[selectedPlan][numSubjects - 1];
+    const hasMaths = selectedSubjects.includes("Maths");
+    const otherSubjects = selectedSubjects.filter(
+      (sub) => sub !== "Maths"
+    ).length;
+
+    if (numSubjects === 0 || !plan) return 0;
+
+    let launchPrice = 0;
+    let masteryPrice = 0;
+
+    if (numSubjects === 1) {
+      if (hasMaths) {
+        launchPrice = 37;
+        masteryPrice = 10;
+        liveLessons = 2;
+      } else {
+        launchPrice = 20;
+        masteryPrice = 5;
+        liveLessons = 1;
+      }
+    } else if (numSubjects === 2) {
+      if (hasMaths) {
+        launchPrice = 52;
+        masteryPrice = 15;
+        liveLessons = 3;
+      } else {
+        launchPrice = 37;
+        masteryPrice = 10;
+        liveLessons = 2;
+      }
+    } else if (numSubjects === 3) {
+      if (hasMaths) {
+        launchPrice = 67;
+        masteryPrice = 20;
+        liveLessons = 4;
+      } else {
+        launchPrice = 52;
+        masteryPrice = 15;
+        liveLessons = 3;
+      }
+    } else if (numSubjects === 4) {
+      if (hasMaths) {
+        launchPrice = 77;
+        masteryPrice = 25;
+        liveLessons = 5;
+      }
+    } else if (numSubjects === 5) {
+      launchPrice = 92;
+      masteryPrice = 30;
+      liveLessons = 6;
+    }
+
+    return plan === "Launch GCSE" ? launchPrice : masteryPrice;
   };
 
   const totalPrice = calculatePrice();
@@ -63,8 +110,8 @@ const MultiStepForm = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col mt-32 items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
+    <div className="h-screen flex flex-col mt-32 items-center justify-center">
+      <div className="w-full max-w-4xl mt-32 bg-white p-6 rounded-lg shadow-md">
         {/* Step Navigation */}
         <div className="flex justify-between items-center mb-4">
           <button
@@ -196,10 +243,10 @@ const MultiStepForm = () => {
                     Launch GCSE
                   </h2>
                   <h3 className="text-3xl font-bold mb-4 text-white">
-                    £{pricing["Launch GCSE"][selectedSubjects.length - 1]}
+                    £{calculatePrice("Launch GCSE")}
                   </h3>
                   <p className="mb-4 text-sm text-gray-300">
-                    Lessons per week: <strong>{selectedSubjects.length}</strong>
+                    Live Lessons per week: <strong>{liveLessons}</strong>
                   </p>
                   <button
                     onClick={handleContinue}
@@ -245,10 +292,10 @@ const MultiStepForm = () => {
                     GCSE Mastery
                   </h2>
                   <h3 className="text-3xl font-bold mb-4 text-white">
-                    £{pricing["GCSE Mastery"][selectedSubjects.length - 1]}
+                    £{calculatePrice("GCSE Mastery")}
                   </h3>
                   <p className="mb-4 text-sm text-gray-300">
-                    Lessons per week: <strong>{selectedSubjects.length}</strong>
+                    Live Lessons per week: <strong>{liveLessons}</strong>
                   </p>
                   <button
                     onClick={handleContinue}
@@ -256,7 +303,6 @@ const MultiStepForm = () => {
                   >
                     Sign Up
                   </button>
-
                   <h4 className="font-bold mb-2 text-white">
                     GCSE Mastery Includes:
                   </h4>
@@ -356,7 +402,7 @@ const MultiStepForm = () => {
                     Your total comes to just:
                   </p>
                   <p className="text-3xl font-bold text-red-500">
-                    £{totalPrice.toFixed(2)}
+                    £{calculatePrice(selectedPlan).toFixed(2)}
                   </p>
                 </div>
               </div>
