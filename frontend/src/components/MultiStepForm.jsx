@@ -144,27 +144,25 @@ const MultiStepForm = () => {
               Which year group is your child in?
             </h2>
             <div className="grid grid-cols-2 gap-4 mb-4">
-              {["KS3 - Year 7/8/9", "KS4 - Year 10/11", "A-level"].map(
-                (year) => (
-                  <label
-                    key={year}
-                    className={`block p-4 border rounded-lg cursor-pointer text-center ${
-                      selectedClass === year
-                        ? "bg-black text-white border-black"
-                        : "bg-white text-gray-700 border-gray-300"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      value={year}
-                      checked={selectedClass === year}
-                      onChange={() => handleClassSelection(year)}
-                      className="hidden"
-                    />
-                    {year}
-                  </label>
-                )
-              )}
+              {["KS3 - Year 7/8/9", "KS4 - Year 10/11"].map((year) => (
+                <label
+                  key={year}
+                  className={`block p-4 border rounded-lg cursor-pointer text-center ${
+                    selectedClass === year
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-gray-700 border-gray-300"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={year}
+                    checked={selectedClass === year}
+                    onChange={() => handleClassSelection(year)}
+                    className="hidden"
+                  />
+                  {year}
+                </label>
+              ))}
             </div>
             {showError && (
               <p className="text-red-500 text-sm mb-4">
@@ -238,22 +236,32 @@ const MultiStepForm = () => {
                     : "border-gray-800"
                 } rounded-lg p-6 w-full md:w-1/2 transition-all flex flex-col justify-between`}
               >
-                <div>
+                <div className="relative">
                   <h2 className="text-xl font-bold mb-4 text-white">
                     Launch GCSE
                   </h2>
+                  <span className="bg-yellow-400 text-black px-2 py-1 rounded-full text-xs float-end absolute top-0 right-0">
+                    Popular
+                  </span>
                   <h3 className="text-3xl font-bold mb-4 text-white">
                     £{calculatePrice("Launch GCSE")}
                   </h3>
+                  <p className="mb-2 text-sm text-gray-300">
+                    Cost per lesson:{" "}
+                    <strong>
+                      £
+                      {(calculatePrice("Launch GCSE") / liveLessons).toFixed(2)}
+                    </strong>
+                  </p>
                   <p className="mb-4 text-sm text-gray-300">
                     Live Lessons per week: <strong>{liveLessons}</strong>
                   </p>
-                  <button
+                  {/* <button
                     onClick={handleContinue}
                     className="w-full bg-gradient-to-r from-green-500 to-teal-400 hover:from-green-600 hover:to-teal-500 text-white py-2 rounded-md mb-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Sign Up
-                  </button>
+                  </button> */}
 
                   <h4 className="font-bold mb-2 text-white">
                     Launch GCSE Includes:
@@ -275,7 +283,7 @@ const MultiStepForm = () => {
                   onClick={() => handlePlanSelection("Launch GCSE")}
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white py-2 rounded-md mt-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  Select Plan
+                  Sign Up
                 </button>
               </div>
 
@@ -291,18 +299,28 @@ const MultiStepForm = () => {
                   <h2 className="text-xl font-bold mb-4 text-white">
                     GCSE Mastery
                   </h2>
+
                   <h3 className="text-3xl font-bold mb-4 text-white">
                     £{calculatePrice("GCSE Mastery")}
                   </h3>
+                  <p className="mb-2 text-sm text-gray-300">
+                    Cost per lesson:{" "}
+                    <strong>
+                      £
+                      {(calculatePrice("GCSE Mastery") / liveLessons).toFixed(
+                        2
+                      )}
+                    </strong>
+                  </p>
                   <p className="mb-4 text-sm text-gray-300">
                     Live Lessons per week: <strong>{liveLessons}</strong>
                   </p>
-                  <button
+                  {/* <button
                     onClick={handleContinue}
                     className="w-full bg-gradient-to-r from-green-500 to-teal-400 hover:from-green-600 hover:to-teal-500 text-white py-2 rounded-md mb-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Sign Up
-                  </button>
+                  </button> */}
                   <h4 className="font-bold mb-2 text-white">
                     GCSE Mastery Includes:
                   </h4>
@@ -321,7 +339,7 @@ const MultiStepForm = () => {
                   onClick={() => handlePlanSelection("GCSE Mastery")}
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white py-2 rounded-md mt-6 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  Select Plan
+                  Sign Up
                 </button>
               </div>
             </div>
@@ -393,6 +411,19 @@ const MultiStepForm = () => {
                     type="email"
                     placeholder="Enter your email"
                     value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full max-w-xs border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <label htmlFor="email" className="text-sm text-gray-500">
+                    Enter your Contact Number
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your Contact Number"
+                    value={name}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full max-w-xs border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
                   />
