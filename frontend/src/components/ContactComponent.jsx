@@ -18,50 +18,33 @@ const ContactComponent = () => {
   }, []);
 
   return (
-    <div className="bg-yellow-400 p-8 md:p-12 lg:p-16 rounded-xl text-center md:text-left flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
-      {/* Left Content */}
-      <div className="flex-1">
-        <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-          Contact us to get tailored advice
-        </h2>
-        <p className="text-lg text-black mb-6 w-4/5">
-          Get personalised help and all the information you need. Learn how
-          Mobile Tutors can help your child!
-        </p>
+    <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 md:p-16 rounded-2xl shadow-xl text-center md:text-left flex flex-col items-center md:items-start w-full max-w-4xl mx-auto">
+      <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+        Let's Connect & Make Learning Fun!
+      </h2>
+      <p className="text-lg md:text-xl text-white mb-8 w-full md:w-4/5">
+        Get expert guidance and tailored learning strategies. Discover how
+        Mobile Tutors can elevate your child's education.
+      </p>
 
-        {/* HubSpot Form Embed */}
-        <div id="hubspotForm" className="w-4/5"></div>
+      {/* HubSpot Form Embed */}
+      <div
+        id="hubspotForm"
+        className="w-full md:w-4/5 bg-white p-6 rounded-lg shadow-md"
+      ></div>
 
-        <p className="text-sm text-gray-700 mt-4 w-4/5">
-          By clicking, you agree to receive emails and messages from Mobile
-          Tutors. You can unsubscribe anytime. See our{" "}
-          <a href="#" className="text-blue-500 underline">
-            privacy policy
-          </a>{" "}
-          and{" "}
-          <a href="#" className="text-blue-500 underline">
-            terms
-          </a>{" "}
-          for more info.
-        </p>
-      </div>
-
-      {/* Right Content */}
-      <div className="flex-none w-48 h-48 md:w-72 md:h-72">
-        <img
-          src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fGNhbGwlMjBjZW50ZXJ8ZW58MHx8MHx8fDA%3D"
-          alt="Team Lead"
-          className="rounded-full mb-4 md:mb-6 w-full h-full object-center"
-        />
-        <div className="text-center md:text-left">
-          <p className="text-black text-lg font-semibold text-center">
-            Team Mobile Tutors
-          </p>
-          <p className="text-gray-700 text-sm text-center">
-            Contact Us now to get started...
-          </p>
-        </div>
-      </div>
+      <p className="text-sm text-gray-100 mt-6 w-full md:w-4/5">
+        By clicking, you agree to receive emails and messages from Mobile
+        Tutors. You can unsubscribe anytime. See our{" "}
+        <a href="#" className="text-white font-semibold underline">
+          privacy policy
+        </a>{" "}
+        and{" "}
+        <a href="#" className="text-white font-semibold underline">
+          terms
+        </a>{" "}
+        for more info.
+      </p>
     </div>
   );
 };
