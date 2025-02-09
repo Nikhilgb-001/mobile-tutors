@@ -2,7 +2,7 @@ import React from "react";
 import { SiTrustpilot } from "react-icons/si";
 const HeroSection = () => {
   return (
-    <div className="flex flex-col rounded-3xl mt-4 lg:flex-row items-center justify-between shadow-lg lg:px-20 p-12 bg-[#FFFFFF">
+    <div className="flex flex-col rounded-3xl mt-16 lg:flex-row items-center justify-between shadow-lg lg:px-20 p-12 bg-[#FFFFFF">
       {/* Left Section */}
       <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-800">
