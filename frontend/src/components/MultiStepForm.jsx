@@ -204,54 +204,127 @@ const MultiStepForm = () => {
   // };
 
   // final code
+  // const handlePlanSelection = (plan) => {
+  //   if (selectedSubjects.length > 0) {
+  //     let paymentLink = "";
+  //     const selectedCoreSubjects = selectedSubjects.filter((subject) =>
+  //       ["Physics", "Chemistry", "Biology", "English"].includes(subject)
+  //     );
+  //     const numCoreSubjects = selectedCoreSubjects.length;
+  //     const hasMaths = selectedSubjects.includes("Maths");
+
+  //     if (numCoreSubjects === 1 && !hasMaths) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/14kaHb0GJ2ho2PK9AO"
+  //           : "https://buy.stripe.com/14k3eJexz8FMeys28u";
+  //     } else if (numCoreSubjects === 2 || (hasMaths && numCoreSubjects === 0)) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/bIY8z3dtvaNU8a4dR0"
+  //           : "https://buy.stripe.com/eVa7uZ1KN3lseys8wF";
+  //     } else if (numCoreSubjects === 3 || (numCoreSubjects === 1 && hasMaths)) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/28obLfexz9JQ61W008"
+  //           : "https://buy.stripe.com/aEUg1v2ORcW23TOcN1";
+  //     } else if (numCoreSubjects === 4 || (numCoreSubjects === 2 && hasMaths)) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/3cs5mRgFH6xEgGA7sz"
+  //           : "https://buy.stripe.com/6oE4iN89b3lsbmg3cx";
+  //     } else if (numCoreSubjects === 3 && hasMaths) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/eVacPjgFH3ls8a46oA"
+  //           : "https://buy.stripe.com/eVa6qV89baNU4XS14r";
+  //     } else if (numCoreSubjects === 4 && hasMaths) {
+  //       paymentLink =
+  //         plan === "Launch GCSE"
+  //           ? "https://buy.stripe.com/14kcPjcpr9JQ0HC9AN"
+  //           : "https://buy.stripe.com/3cs16B89b8FMfCw28o";
+  //     }
+
+  //     if (paymentLink) {
+  //       window.location.href = paymentLink;
+  //     } else {
+  //       setShowError(true);
+  //     }
+  //   } else {
+  //     setShowError(true);
+  //   }
+  // };
+
   const handlePlanSelection = (plan) => {
     if (selectedSubjects.length > 0) {
       let paymentLink = "";
-      const selectedCoreSubjects = selectedSubjects.filter((subject) =>
-        ["Physics", "Chemistry", "Biology", "English"].includes(subject)
-      );
-      const numCoreSubjects = selectedCoreSubjects.length;
-      const hasMaths = selectedSubjects.includes("Maths");
 
-      if (numCoreSubjects === 1 && !hasMaths) {
+      // Extract core subjects (English, Chemistry, Biology, Physics)
+      const selectedCoreSubjects = selectedSubjects.filter((subject) =>
+        ["English", "Chemistry", "Biology", "Physics"].includes(subject)
+      );
+
+      // Check if Maths is selected
+      const isMathsSelected = selectedSubjects.includes("Maths");
+
+      // Logic to determine the payment link
+      if (selectedCoreSubjects.length === 1 && !isMathsSelected) {
+        // Case 1: Any one subject from (English, Chemistry, Biology, Physics)
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/14kaHb0GJ2ho2PK9AO"
             : "https://buy.stripe.com/14k3eJexz8FMeys28u";
-      } else if (numCoreSubjects === 2 || (hasMaths && numCoreSubjects === 0)) {
+      } else if (
+        (selectedCoreSubjects.length === 2 && !isMathsSelected) ||
+        (selectedSubjects.length === 1 && isMathsSelected)
+      ) {
+        // Case 2: Any two subjects from (English, Chemistry, Biology, Physics) OR only Maths
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/bIY8z3dtvaNU8a4dR0"
             : "https://buy.stripe.com/eVa7uZ1KN3lseys8wF";
-      } else if (numCoreSubjects === 3 || (numCoreSubjects === 1 && hasMaths)) {
+      } else if (
+        (selectedCoreSubjects.length === 3 && !isMathsSelected) ||
+        (selectedCoreSubjects.length === 1 && isMathsSelected)
+      ) {
+        // Case 3: Any three subjects from (English, Chemistry, Biology, Physics) OR one subject with Maths
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/28obLfexz9JQ61W008"
             : "https://buy.stripe.com/aEUg1v2ORcW23TOcN1";
-      } else if (numCoreSubjects === 4 || (numCoreSubjects === 2 && hasMaths)) {
+      } else if (
+        (selectedCoreSubjects.length === 4 && !isMathsSelected) ||
+        (selectedCoreSubjects.length === 2 && isMathsSelected)
+      ) {
+        // Case 4: All four subjects from (English, Chemistry, Biology, Physics) OR two subjects with Maths
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/3cs5mRgFH6xEgGA7sz"
             : "https://buy.stripe.com/6oE4iN89b3lsbmg3cx";
-      } else if (numCoreSubjects === 3 && hasMaths) {
+      } else if (selectedCoreSubjects.length === 3 && isMathsSelected) {
+        // Case 5: Any three subjects from (English, Chemistry, Biology, Physics) with Maths
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/eVacPjgFH3ls8a46oA"
             : "https://buy.stripe.com/eVa6qV89baNU4XS14r";
-      } else if (numCoreSubjects === 4 && hasMaths) {
+      } else if (selectedCoreSubjects.length === 4 && isMathsSelected) {
+        // Case 6: All four subjects from (English, Chemistry, Biology, Physics) with Maths
         paymentLink =
           plan === "Launch GCSE"
             ? "https://buy.stripe.com/14kcPjcpr9JQ0HC9AN"
             : "https://buy.stripe.com/3cs16B89b8FMfCw28o";
+      } else {
+        // Default case (fallback)
+        paymentLink =
+          plan === "Launch GCSE"
+            ? "https://buy.stripe.com/14kaHb0GJ2ho2PK9AO"
+            : "https://buy.stripe.com/14k3eJexz8FMeys28u";
       }
 
-      if (paymentLink) {
-        window.location.href = paymentLink;
-      } else {
-        setShowError(true);
-      }
+      // Redirect to the payment link
+      window.location.href = paymentLink;
     } else {
-      setShowError(true);
+      setShowError(true); // Show error if no subjects are selected
     }
   };
 
