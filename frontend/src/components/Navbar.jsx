@@ -273,7 +273,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between py-3 px-6">
         <div className="flex items-center space-x-2">
           <img
-            src="https://mobiletutors.co.uk/wp-content/uploads/2021/12/cropped-Mobile-Tutors-Logo-B16-clear-background-300x146.png"
+            src="https://d1wqzb5bdbcre6.cloudfront.net/30ffedd81ca2bb96e51bda32362bb0563bd2a702b40b62acdb7ee1dc8643ec4b/68747470733a2f2f66696c65732e7374726970652e636f6d2f66696c65732f4d44423859574e6a64463878536a4e705530684a4d553534626d64585548673566475a6662476c325a5639795646553053466c495a466b77536a684c53584a4b6230517a636d747657474d30304b43447054784736"
             alt="Logo"
             className="h-16"
           />

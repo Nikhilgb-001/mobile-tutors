@@ -83,8 +83,7 @@ const Footer = () => {
         <div className="basis-full md:basis-1/2 flex justify-center md:justify-end">
           <Link to={"/"} className="logo">
             <img
-              src="https://mobiletutors.co.uk/wp-content/uploads/2022/08/Hres-LOGO-Corporate-21-22.png"
-              alt="Mobile Tutors Logo"
+              src="https://d1wqzb5bdbcre6.cloudfront.net/30ffedd81ca2bb96e51bda32362bb0563bd2a702b40b62acdb7ee1dc8643ec4b/68747470733a2f2f66696c65732e7374726970652e636f6d2f66696c65732f4d44423859574e6a64463878536a4e705530684a4d553534626d64585548673566475a6662476c325a5639795646553053466c495a466b77536a684c53584a4b6230517a636d747657474d30304b43447054784736"
               className="h-52 w-full"
             />
           </Link>

@@ -100,7 +100,7 @@ const Home = () => (
     <TestimonialCarousel />
     <LovedByStudents />
     <ContactComponent />
-    <Pricing />
+    {/* <Pricing /> */}
     <Footer />
   </div>
 );
