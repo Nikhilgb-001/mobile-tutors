@@ -90,6 +90,7 @@ import FAQ from "./components/Faq";
 import ContactComponent from "./components/ContactComponent";
 import MultiStepForm from "./components/MultiStepForm";
 import Pricing from "./components/Pricing";
+import ApplicationForm from "./components/ApplicationForm";
 
 const Home = () => (
   <div className="space-y-12 w-full h-screen p-3 lg:p-6">
@@ -99,8 +100,8 @@ const Home = () => (
     <FAQ />
     <TestimonialCarousel />
     <LovedByStudents />
-    <ContactComponent />
     {/* <Pricing /> */}
+    {/* <ApplicationForm /> */}
     <Footer />
   </div>
 );
@@ -109,7 +110,7 @@ const App = () => {
   const location = useLocation(); // Get the current route
 
   return (
-    <>
+    <div className="space-y-12 w-full h-screen p-6 lg:p-20">
       {/* Conditionally render Navbar based on the route */}
       {location.pathname !== "/pricing" && <Navbar />}
 
@@ -117,8 +118,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/get-started" element={<MultiStepForm />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/apply-for-tutor" element={<ApplicationForm />} />
+        <Route path="/contact-us" element={<ContactComponent />} />
       </Routes>
-    </>
+    </div>
   );
 };
 

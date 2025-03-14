@@ -259,13 +259,24 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileContactDropdownOpen, setIsMobileContactDropdownOpen] =
+    useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Reset mobile contact dropdown when closing the menu
+    if (isMobileMenuOpen) {
+      setIsMobileContactDropdownOpen(false);
+    }
+  };
+
+  const toggleMobileContactDropdown = () => {
+    setIsMobileContactDropdownOpen(!isMobileContactDropdownOpen);
   };
 
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
+    setIsMobileContactDropdownOpen(false);
   };
 
   return (
@@ -279,29 +290,59 @@ const Navbar = () => {
           />
         </div>
 
+        {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 text-gray-600 font-medium">
-          <Link to="/" className="hover:text-gray-800 cursor-pointer">
-            Home
-          </Link>
-          <Link to="/about" className="hover:text-gray-800 cursor-pointer">
-            About Us
-          </Link>
-          <Link to="/courses" className="hover:text-gray-800 cursor-pointer">
-            Courses
-          </Link>
-
-          <Link to="/faqs" className="hover:text-gray-800 cursor-pointer">
-            FAQs
-          </Link>
-          <Link
-            to="/testimonials"
-            className="hover:text-gray-800 cursor-pointer"
-          >
-            Testimonials
-          </Link>
-          <Link to="/blog" className="hover:text-gray-800 cursor-pointer">
-            Blog
-          </Link>
+          <li>
+            <Link to="/" className="hover:text-gray-800 cursor-pointer">
+              Home
+            </Link>
+          </li>
+          <li className="relative group">
+            <span className="cursor-pointer hover:text-gray-800">
+              Contact Us
+            </span>
+            <ul className="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300">
+              <li>
+                <Link
+                  to="/contact-us"
+                  className="block px-4 py-2 text-gray-600 hover:text-gray-800"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/apply-for-tutor"
+                  className="block px-4 py-2 text-gray-600 hover:text-gray-800"
+                >
+                  Apply for Tutor
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Link to="/courses" className="hover:text-gray-800 cursor-pointer">
+              Courses
+            </Link>
+          </li>
+          <li>
+            <Link to="/faqs" className="hover:text-gray-800 cursor-pointer">
+              FAQs
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/testimonials"
+              className="hover:text-gray-800 cursor-pointer"
+            >
+              Testimonials
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" className="hover:text-gray-800 cursor-pointer">
+              Blog
+            </Link>
+          </li>
         </ul>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -316,6 +357,7 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             onClick={toggleMobileMenu}
@@ -339,6 +381,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white px-6 py-4 shadow-md">
           <ul className="space-y-4 text-gray-600 font-medium">
@@ -352,13 +395,34 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/about"
-                className="hover:text-gray-800 cursor-pointer"
-                onClick={handleLinkClick}
+              <button
+                onClick={toggleMobileContactDropdown}
+                className="w-full text-left hover:text-gray-800"
               >
-                About Us
-              </Link>
+                Contact Us
+              </button>
+              {isMobileContactDropdownOpen && (
+                <ul className="mt-2 ml-4 space-y-2">
+                  <li>
+                    <Link
+                      to="/contact-us"
+                      className="hover:text-gray-800 cursor-pointer"
+                      onClick={handleLinkClick}
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/apply-for-tutor"
+                      className="hover:text-gray-800 cursor-pointer"
+                      onClick={handleLinkClick}
+                    >
+                      Apply for Tutor
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
             <li>
               <Link
